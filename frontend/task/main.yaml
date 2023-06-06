@@ -1,0 +1,54 @@
+- name: Installing Nginx
+  ansible.builtin.package:
+    name: nginx
+    state: present
+
+- name: Download and extracting frontend 
+  ansible.builtin.include_role:
+    name: common
+    tasks_from: download
+
+- name: Copy nginx config 
+  ansible.builtin.template:
+     src: nginx.conf 
+     dest: /etc/nginx/nginx.conf 
+  notify: Restarting Nginx
+     
+- name: Cleanup of Old Web Content 
+  ansible.builtin.file:
+    path: /usr/share/nginx/html 
+    state: absent    # means delete
+
+- name: Copy frontend content to nginx path 
+  ansible.builtin.copy:
+     src: /tmp/frontend-main/static/
+     dest: /usr/share/nginx/html/  
+     remote_src: yes  # Source is remote machine as download of the file happened on the remote server.
+
+- name: Copying Roboshop Configuration  
+  ansible.builtin.template:
+    src: roboshop.conf 
+    dest: /etc/nginx/default.d/roboshop.conf 
+  notify: Restarting Nginx
+
+- name: Starting Service 
+  ansible.builtin.systemd:
+    state: started
+    daemon_reload: yes
+    name: nginx 
+    enabled: yes
+
+- name: Installing the filebeat 
+  ansible.builtin.include_role:
+    name: elk 
+    tasks_from: filebeat  
+
+- name: Installing the NodeExporter  
+  ansible.builtin.include_role:
+    name: prometheus 
+    tasks_from: node-exporter   
+
+- name: Doing set-hostname 
+  ansible.builtin.include_role:
+    name: common
+    tasks_from: set-hostname
