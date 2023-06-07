@@ -4,9 +4,10 @@
     state: present
 
 - name: Download and extracting frontend 
-  ansible.builtin.include_role:
-    name: common
-    tasks_from: download
+  ansible.builtin.unarcive:
+    scr: https://github.com/stans-robot-project/frontend/archive/main.zip"
+    dest: /tmp
+    remote_src: yes
 
 - name: Cleanup of Old Web Content 
   ansible.builtin.file:
@@ -20,19 +21,12 @@
      remote_src: yes  # Source is remote machine as download of the file happened on the remote server.
 
 - name: Copying Roboshop Configuration  
-  ansible.builtin.template:
+  ansible.builtin.copy:
     src: roboshop.conf 
     dest: /etc/nginx/default.d/roboshop.conf 
-  notify: Restarting Nginx
 
-- name: Starting Service 
-  ansible.builtin.systemd:
-    state: started
-    daemon_reload: yes
-    name: nginx 
-    enabled: yes
-
-- name: Doing set-hostname 
-  ansible.builtin.include_role:
-    name: common
-    tasks_from: set-hostname
+- name: Restarting Nginx 
+  ansible.builtin.service:
+    name: nginx
+   state: restarted
+   enabled: yes
