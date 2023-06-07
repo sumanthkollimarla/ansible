@@ -3,10 +3,12 @@
     name: nginx
     state: present
 
-- name: Download and extracting frontend 
-  ansible.builtin.include_role:
-    name: common
-    tasks_from: download
+- name: Download and extracting frontend
+  ansible.builtin.narchive:
+    src: https://github.com/stans-robot-project/frontend/archive/main.zip"
+    dest: /tmp
+    remote_scr: yes
+
 
 - name: Copy nginx config 
   ansible.builtin.template:
