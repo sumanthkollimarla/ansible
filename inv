@@ -8,19 +8,19 @@ mongodb.sumanthk.us.to
 redis.sumanthk.us.to 
 
 [user]
-user-dev.sumanthk.us.to
+user.sumanthk.us.to
 
 [cart]
-cart-dev.sumanthk.us.to 
+cart.sumanthk.us.to 
 
 [shipping]
-shipping-dev.sumanthk.us.to 
+shipping.sumanthk.us.to 
 
 [mysql]
-mysql-dev.sumanthk.us.to
+mysql.sumanthk.us.to
 
 [rabbitmq]
-rabbitmq-dev.sumanthk.us.to 
+rabbitmq.sumanthk.us.to 
 
 [payment]
-payment-dev.sumanthk.us.to 
+payment.sumanthk.us.to 
