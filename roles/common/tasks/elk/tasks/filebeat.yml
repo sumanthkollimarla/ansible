@@ -1,0 +1,22 @@
+# This task is going to install and configure filebeat on all the backend components
+- name: Copying Elastic Filebeat Repo 
+  ansible.builtin.template:
+    src: elastic.repo 
+    dest: /etc/yum.repos.d/elastic.repo 
+
+- name: Installing Filebeat 
+  ansible.builtin.yum:
+    name: filebeat 
+    state: present
+
+- name: Copying The Filebeat Config 
+  ansible.builtin.template:
+    src: filebeat.yml 
+    dest: /etc/filebeat/filebeat.yml 
+
+- name: Starting Filebeat 
+  ansible.builtin.systemd:
+    name: filebeat
+    daemon_reload: yes
+    state: restarted
+    enabled: yes
