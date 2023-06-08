@@ -3,3 +3,24 @@ frontend-.sumanthk.us.to
 
 [mongodb]
 mongodb.sumanthk.us.to
+
+[redis]
+redis-dev.sumanthk.us.to 
+
+[user]
+user-dev.sumanthk.us.to 
+
+[cart]
+cart-dev.sumanthk.us.to 
+
+[shipping]
+shipping-dev.sumanthk.us.to 
+
+[mysql]
+mysql-dev.sumanthk.us.to
+
+[rabbitmq]
+rabbitmq-dev.sumanthk.us.to 
+
+[payment]
+payment-dev.sumanthk.us.to 
