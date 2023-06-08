@@ -1,5 +1,8 @@
 [frontend]
-frontend.sumanthk.us.to 
+frontend.sumanthk.us.to
+
+[catalogue]
+catalogue.sumanthk.us.to 
 
 [mongodb]
 mongodb.sumanthk.us.to
