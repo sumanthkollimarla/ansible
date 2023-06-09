@@ -34,3 +34,14 @@
 - name: Installing node.js packages
   community.general.npm:
     path: /home/roboshop/{{COMPONENT}}
+
+- name: Copying the system file
+  ansible.builtin.copy:
+     src: systemd.service
+     dest: /etc/systemd/system/{{COMPONENT}}.service
+
+- name: Restarting Nginx
+  ansible.builtin.service:
+    name: nginx
+    state: restarted
+    enabled: yes
