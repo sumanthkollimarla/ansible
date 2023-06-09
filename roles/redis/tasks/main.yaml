@@ -7,18 +7,18 @@
 
 - name: Install Redis
   hosts: redis.sumanthk.us.to
-
+ 
   tasks:
     - name: Update apt cache
       apt:
-        update_cache: yes
+      update_cache: yes
       become: true
 
-    - name: Install Redis package
-      apt:
-        name: redis-server
-        state: present
-      become: true
+- name: Install Redis package
+  apt:
+    name: redis-server
+    state: present
+    become: true
 
 
 - name: Update Redis Config
