@@ -37,8 +37,8 @@
 
 - name: Copying the system file
   ansible.builtin.copy:
-     src: systemd.servce
-     dest: /etc/systemd/system/systemd.servce
+     src: systemd.service
+     dest: /etc/systemd/system/{{COMPONENT}}.service
 
 - name: Restarting systemd
   ansible.builtin.systemd:
