@@ -4,7 +4,7 @@
      src: redis.repo 
      dest: /etc/yum.repos.d/redis.repo 
 
----
+
 - name: Install Redis
   hosts: redis.sumanthk.us.to
 
