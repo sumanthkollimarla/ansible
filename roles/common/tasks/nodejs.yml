@@ -25,7 +25,7 @@
 
 - name: Installing node.js packages
   community.general.npm:
-    path: /home/roboshop/{{COMPONENT}} 
+    path: /home/roboshop/{{COMPONENT}}
 
 - name: Configuring the service 
   ansible.builtin.include_role:
