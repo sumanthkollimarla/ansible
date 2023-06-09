@@ -40,8 +40,11 @@
      src: systemd.service
      dest: /etc/systemd/system/{{COMPONENT}}.service
 
-- name: Restarting Nginx
-  ansible.builtin.service:
-    name: nginx
+- name: Restarting systemd
+  ansible.builtin.systemd:
     state: restarted
-    enabled: yes
+    daemon_reload: yes
+    name: "{{COMPONENT}}"
+    
+- name: Set the host name  
+  ansible.builtin.shell: set-hostname {{COMPONENT}}
