@@ -4,10 +4,22 @@
      src: redis.repo 
      dest: /etc/yum.repos.d/redis.repo 
 
-- name: Installing Redis
-  ansible.builtin.package:
-    name: redis-6.2.7
-    state: present
+---
+- name: Install Redis
+  hosts: redis.sumanthk.us.to
+
+  tasks:
+    - name: Update apt cache
+      apt:
+        update_cache: yes
+      become: true
+
+    - name: Install Redis package
+      apt:
+        name: redis-server
+        state: present
+      become: true
+
 
 - name: Update Redis Config
   ansible.builtin.replace:
