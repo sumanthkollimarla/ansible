@@ -20,6 +20,15 @@
   community.mysql.mysql_info:
     login_user: root
     login_psssword: roboshop@1
+  ignore_errors: yes
+
+- name: reset the password
+  debug:
+    msg: Resetting the mysql password
+
+- name: This is some xyz   
+  debug:
+    msg: i am xyz 
 
 
 
