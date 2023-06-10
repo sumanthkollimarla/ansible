@@ -21,6 +21,7 @@
     login_user: root
     login_psssword: roboshop@1
   ignore_errors: yes
+  register: stat
 
 - name: reset the password
   debug:
