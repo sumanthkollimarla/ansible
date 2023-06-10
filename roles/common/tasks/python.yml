@@ -12,16 +12,11 @@
     name: common
     tasks_from: create-user 
 
-- name: Download and extracting component 
+- name: Download and extracting frontend 
   ansible.builtin.include_role:
     name: common
-    tasks_from: download-from-nexus
+    tasks_from: download
  
-- name: Download and extracting component 
-  ansible.builtin.include_role:
-    name: common
-    tasks_from: download  
-
 - name: Deleting Old Content
   ansible.builtin.file:
     path: /home/roboshop/{{COMPONENT}}
