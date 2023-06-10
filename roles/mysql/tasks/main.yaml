@@ -30,6 +30,7 @@
 - name: This is some xyz   
   debug:
     msg: i am xyz 
+  when: mysql.false
 
 
 
