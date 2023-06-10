@@ -1,4 +1,50 @@
-- name: Configuring NodeJS Component 
+- name: Configure the Yum Repos 
+  ansible.builtin.shell: curl --silent --location https://rpm.nodesource.com/setup_16.x | sudo bash -
+
+- name: Install NodeJS 
+  ansible.builtin.yum:
+    name: "{{item}}"
+    state: present  
+  loop: 
+    - nodejs 
+    - gcc-c++  
+
+- name: Adding Application User 
+  ansible.builtin.user:
+    name: roboshop 
+    comment: roboshop project application user 
+
+- name: Download and extraing frontend 
   ansible.builtin.include_role:
     name: common
-    tasks_from: nodejs
+    tasks_from: download
+
+- name: Deleting Old Content
+  ansible.builtin.file:
+    path: /home/roboshop/{{COMPONENT}}
+    state: absent  
+
+- name: Copy file to destination
+  ansible.builtin.copy:
+    src: /tmp/{{COMPONENT}}-main/
+    dest: /home/roboshop/{{COMPONENT}}/
+    remote_src: yes
+  become_user: roboshop 
+
+- name: Installing node.js packages
+  community.general.npm:
+    path: /home/roboshop/{{COMPONENT}}
+
+- name: Copying the system file
+  ansible.builtin.copy:
+     src: systemd.service
+     dest: /etc/systemd/system/{{COMPONENT}}.service
+
+- name: Restarting systemd
+  ansible.builtin.systemd:
+    state: restarted
+    daemon_reload: yes
+    name: "{{COMPONENT}}"
+    
+- name: Set the host name  
+  ansible.builtin.shell: set-hostname {{COMPONENT}}
