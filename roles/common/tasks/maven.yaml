@@ -8,15 +8,11 @@
     name: common
     tasks_from: create-user 
 
-- name: Download and extracting component 
-  ansible.builtin.include_role:
-    name: common
-    tasks_from: download-from-nexus
-
-- name: Download and extracting frontend
+- name: Download and extracting frontend 
   ansible.builtin.include_role:
     name: common
     tasks_from: download
+
 
 - name: Deleting Old Content
   ansible.builtin.file:
@@ -30,7 +26,7 @@
     remote_src: yes
   become_user: roboshop
 
-- name: Creating artifact
+- name: Creating a package
   ansible.builtin.shell: mvn clean package && mv target/{{COMPONENT}}-1.0.jar {{COMPONENT}}.jar
   args:
     chdir: /home/roboshop/{{COMPONENT}}
