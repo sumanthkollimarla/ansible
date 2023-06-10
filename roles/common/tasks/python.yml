@@ -41,7 +41,7 @@
     line: uid = {{APP_USER_INFO.uid}}
 
 - name: Updating the Group ID 
-  ansible.builtin.lineinfile:
+  ansible.builtin.service:
     path: /home/roboshop/{{COMPONENT}}/{{COMPONENT}}.ini
     regexp: '^gid'
     line: gid = {{APP_USER_INFO.group}}
