@@ -5,5 +5,5 @@
   register: APP_USER_INFO
 
 - name: prinint the app user app use info 
-  debugg:
+  debug:
     msg: "{{APP_USER_INFO}}"
