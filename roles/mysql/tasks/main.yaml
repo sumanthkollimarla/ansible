@@ -23,9 +23,20 @@
   ignore_errors: yes
   register: stat
 
-- name: fatch MySQL Default password   
-  ansible.builtin.shell:
+- name: Password reset Block
   when: stat.failed
+  block:
+    - name: fatch MySQL Default password   
+      ansible.builtin.shell: grep 'temporary password' /var/log/mysqld.log | awk '{print $NF}'
+      register: DEFAULT_ROOT_PASSWORD
 
+    - name: copy MySQL password reset file
+      ansible.builtin.copy:
+        src: root_password.sql
+        dest: /tmp/root_password.sql
+
+- name: Restart MySQL Default password
+  ansible.builtin.shell: mysql --connect-expired-password -uroot -p"{{DEFAULT_ROOT_PASSWORD.stdout}}
+  register: DEFAULT_ROOT_PASSWORD
 
 
