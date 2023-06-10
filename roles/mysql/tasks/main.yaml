@@ -51,6 +51,11 @@
         ansible.builtin.copy:
          src: password_validate.mysql
          dest: /tmp/password_validate.repo
-         
+
       - name: Uninstall password validate Plugin
         ansible.builtin.shell: mysql  --connect-expired-password -uroot -pRobosohp@1 < /tmp/root_password.sql
+
+- name: Download and extracting Mysql 
+  ansible.builtin.include_role:
+    name: common
+    tasks_from: download
