@@ -25,7 +25,7 @@
 
 - name: reset the password
   debug:
-    msg: Resetting the mysql password
+    msg: "{{stat}}"
 
 - name: This is some xyz   
   debug:
