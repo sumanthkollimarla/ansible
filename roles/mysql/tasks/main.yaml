@@ -23,13 +23,8 @@
   ignore_errors: yes
   register: stat
 
-- name: reset the password
-  debug:
-    msg: "{{stat}}"
-
-- name: This is some xyz   
-  debug:
-    msg: i am xyz 
+- name: fatch MySQL Default password   
+  ansible.builtin.shell:
   when: stat.failed
 
 
